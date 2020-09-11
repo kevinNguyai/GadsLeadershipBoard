@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
 import com.nguyai.gadsleadershipboard.models.Learner;
 import com.nguyai.gadsleadershipboard.models.SkillsIQLeader;
@@ -78,20 +79,25 @@ public class SkillsFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_skills, container, false);
         final RecyclerView skillsRecyclerView = view.findViewById(R.id.skills_recycler_view);
         final LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
+
         skillsRecyclerView.setLayoutManager(layoutManager);
 
         SkillsIQService skillsService = ServiceBuilder.buildService(SkillsIQService.class);
         Call<List<SkillsIQLeader>> request = skillsService.getIQScores();
 
+        final ProgressBar spinnerSkills = view.findViewById(R.id.skills_loader);
+        spinnerSkills.setVisibility(View.VISIBLE);
+
         request.enqueue(new Callback<List<SkillsIQLeader>>() {
             @Override
             public void onResponse(Call<List<SkillsIQLeader>> request, Response<List<SkillsIQLeader>> response) {
                 skillsRecyclerView.setAdapter(new SkillsRecyclerAdapter(getContext(),response.body()));
+                spinnerSkills.setVisibility(View.GONE);
             }
 
             @Override
             public void onFailure(Call<List<SkillsIQLeader>> request, Throwable t) {
-
+                spinnerSkills.setVisibility(View.GONE);
             }
         });
         return view;

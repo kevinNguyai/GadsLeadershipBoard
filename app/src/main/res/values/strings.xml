@@ -15,4 +15,8 @@
     <string name="git_hint">Project on GITHUB (Link)</string>
     <string name="learning_desc">learning hours,</string>
     <string name="skills_desc">Skill IQ Score,</string>
+    <string name="first_name_message">Please Input First Name</string>
+    <string name="last_name_message">Please Input Last Name</string>
+    <string name="email_message">Please Input Email Address</string>
+    <string name="link_message">Please Input Github Project Link</string>
 </resources>

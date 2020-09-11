@@ -10,4 +10,13 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:listitem="@layout/skills_item" />
+
+    <ProgressBar
+        android:id="@+id/skills_loader"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:indeterminateTint="@color/center"
+        android:indeterminateTintMode="src_in" />
 </FrameLayout>

@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
 import com.nguyai.gadsleadershipboard.models.Learner;
 import com.nguyai.gadsleadershipboard.services.LearningHoursService;
@@ -82,16 +83,20 @@ public class LearningFragment extends Fragment {
         LearningHoursService learningService = ServiceBuilder.buildService(LearningHoursService.class);
         Call<List<Learner>> request = learningService.getLearningHours();
 
+        final ProgressBar spinner = view.findViewById(R.id.learning_loader);
+        spinner.setVisibility(View.VISIBLE);
+
         request.enqueue(new Callback<List<Learner>>() {
             @Override
             public void onResponse(Call<List<Learner>> request, Response<List<Learner>> response) {
                 Log.d(TAG, "onBindViewHolder: "+response.body().size());
                 learningRecyclerView.setAdapter(new LearningRecyclerAdapter(getContext(),response.body()));
+                spinner.setVisibility(View.GONE);
             }
 
             @Override
             public void onFailure(Call<List<Learner>> request, Throwable t) {
-
+                spinner.setVisibility(View.GONE);
             }
         });
         return  view;
