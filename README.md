@@ -3,13 +3,11 @@ Google Africa Developer Scholarship, Associate Android Developer Practice Projec
 
 # Approach To the Task
 The Application makes use of 
-- The MVVM Pattern
-- The repository pattern 
-- Dependency Injection with Hilt 
-- Coroutines 
-- Retrofit 
-- View and Data Binding
-- Navigation Component 
+- Multi-Activity Project
+- View pager
+- Customizing Toolbar
+- RecyclerView
+- Making Network Requests with Retrofit Library
 
 # Screenshots
 ![splashscreen](https://user-images.githubusercontent.com/13905039/92924860-43c19380-f442-11ea-84fc-cb09409ce3a3.png)
