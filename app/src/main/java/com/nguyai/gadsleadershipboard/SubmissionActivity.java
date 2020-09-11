@@ -9,6 +9,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -18,9 +19,15 @@ public class SubmissionActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_submission);
+
+        EditText firstName = findViewById(R.id.first_name);
+        firstName.setText("Kevin");
+
+        EditText lastName = findViewById(R.id.last_name);
+        lastName.setText("Nguyai");
 //        informationDialog(R.drawable.ic_baseline_report_problem_24,"Submission not Successful");
-//        informationDialog(R.drawable.ic_baseline_check_circle_24,"Submission Successful");
-        confirmDialog();
+        informationDialog(R.drawable.ic_baseline_check_circle_24,"Submission Successful");
+//        confirmDialog();
     }
 
     private void informationDialog(int image, String message){

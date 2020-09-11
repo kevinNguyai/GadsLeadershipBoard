@@ -11,4 +11,6 @@
     <string name="sure_text">Are you sure</string>
     <string name="yes">Yes</string>
     <string name="ask">\?</string>
+    <string name="email_hint">Email Address</string>
+    <string name="git_hint">Project on GITHUB (Link)</string>
 </resources>
