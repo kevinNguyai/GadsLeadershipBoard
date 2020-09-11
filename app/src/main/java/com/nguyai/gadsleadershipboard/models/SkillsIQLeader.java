@@ -1,22 +1,34 @@
-package com.nguyai.gadsleadershipboard;
+package com.nguyai.gadsleadershipboard.models;
+
+import java.net.URI;
 
 public class SkillsIQLeader {
-    private String leaderName;
+    private String name;
     private int score;
     private String country;
+    private URI badgeUrl;
 
-    public SkillsIQLeader(String leaderName, int score, String country) {
-        this.leaderName = leaderName;
+    public SkillsIQLeader(String name, int score, String country, URI badgeUrl) {
+        this.name = name;
         this.score = score;
         this.country = country;
+        this.badgeUrl = badgeUrl;
     }
 
-    public String getLeaderName() {
-        return leaderName;
+    public URI getBadgeUrl() {
+        return badgeUrl;
     }
 
-    public void setLeaderName(String leaderName) {
-        this.leaderName = leaderName;
+    public void setBadgeUrl(URI badgeUrl) {
+        this.badgeUrl = badgeUrl;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public int getScore() {

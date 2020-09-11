@@ -13,4 +13,6 @@
     <string name="ask">\?</string>
     <string name="email_hint">Email Address</string>
     <string name="git_hint">Project on GITHUB (Link)</string>
+    <string name="learning_desc">learning hours,</string>
+    <string name="skills_desc">Skill IQ Score,</string>
 </resources>

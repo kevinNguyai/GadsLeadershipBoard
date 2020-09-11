@@ -1,7 +1,6 @@
 package com.nguyai.gadsleadershipboard;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,60 +9,54 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.nguyai.gadsleadershipboard.models.SkillsIQLeader;
+
 import java.util.List;
 
-public class LearningRecyclerAdapter extends RecyclerView.Adapter<NoteRecyclerAdapter.ViewHolder> {
+public class SkillsRecyclerAdapter extends RecyclerView.Adapter<SkillsRecyclerAdapter.ViewHolder> {
 
     private  final Context mContext;
-    private final List<NoteInfo> mNotes;
+    private final List<SkillsIQLeader> mLeaders;
     private final LayoutInflater mLayoutInflater;
 
-    public LearningRecyclerAdapter(Context context, List<NoteInfo> notes) {
+    public SkillsRecyclerAdapter(Context context, List<SkillsIQLeader> leaders) {
         mContext = context;
         mLayoutInflater = LayoutInflater.from(context);
-        mNotes = notes;
+        mLeaders = leaders;
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View itemView = mLayoutInflater.inflate(R.layout.item_note_list, parent, false);
+        View itemView = mLayoutInflater.inflate(R.layout.skills_item, parent, false);
         return new ViewHolder(itemView);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        NoteInfo note = mNotes.get(position);
-        holder.mTextCourse.setText(note.getCourse().getTitle());
-        holder.mTextTitle.setText(note.getTitle());
+        SkillsIQLeader leader = mLeaders.get(position);
+        holder.mLeaderName.setText(leader.getName());
+        holder.mDescription.setText(leader.getScore()+" "+holder.itemView.getResources().getString(R.string.skills_desc)+" "+leader.getCountry());
         holder.mCurrentPosition = position;
     }
 
     @Override
     public int getItemCount() {
-        return mNotes.size();
+        return mLeaders.size();
     }
 
     public class  ViewHolder extends RecyclerView.ViewHolder{
 
-        public final TextView mTextCourse;
-        public final TextView mTextTitle;
+        public final TextView mLeaderName;
+        public final TextView mDescription;
         public int mCurrentPosition;
 
         public ViewHolder(@NonNull View itemView) {
 
             super(itemView);
-            mTextCourse = (TextView) itemView.findViewById(R.id.text_course);
-            mTextTitle = (TextView) itemView.findViewById(R.id.text_title);
+            mLeaderName = (TextView) itemView.findViewById(R.id.leader_name);
+            mDescription = (TextView) itemView.findViewById(R.id.description);
 
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Intent intent = new Intent(mContext, NotesActivity.class);
-                    intent.putExtra(NotesActivity.NOTE_POSITION,mCurrentPosition);
-                    mContext.startActivity(intent);
-                }
-            });
         }
     }
 }

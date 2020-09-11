@@ -3,11 +3,23 @@ package com.nguyai.gadsleadershipboard;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.nguyai.gadsleadershipboard.models.Learner;
+import com.nguyai.gadsleadershipboard.services.LearningHoursService;
+import com.nguyai.gadsleadershipboard.services.ServiceBuilder;
+
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -61,6 +73,27 @@ public class LearningFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_learning, container, false);
+
+        View view = inflater.inflate(R.layout.fragment_learning, container, false);
+        final RecyclerView learningRecyclerView = view.findViewById(R.id.learning_recycler_view);
+        final LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
+        learningRecyclerView.setLayoutManager(layoutManager);
+
+        LearningHoursService learningService = ServiceBuilder.buildService(LearningHoursService.class);
+        Call<List<Learner>> request = learningService.getLearningHours();
+
+        request.enqueue(new Callback<List<Learner>>() {
+            @Override
+            public void onResponse(Call<List<Learner>> request, Response<List<Learner>> response) {
+                Log.d(TAG, "onBindViewHolder: "+response.body().size());
+                learningRecyclerView.setAdapter(new LearningRecyclerAdapter(getContext(),response.body()));
+            }
+
+            @Override
+            public void onFailure(Call<List<Learner>> request, Throwable t) {
+
+            }
+        });
+        return  view;
     }
 }

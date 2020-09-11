@@ -3,11 +3,25 @@ package com.nguyai.gadsleadershipboard;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.nguyai.gadsleadershipboard.models.Learner;
+import com.nguyai.gadsleadershipboard.models.SkillsIQLeader;
+import com.nguyai.gadsleadershipboard.services.LearningHoursService;
+import com.nguyai.gadsleadershipboard.services.ServiceBuilder;
+import com.nguyai.gadsleadershipboard.services.SkillsIQService;
+
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -61,7 +75,25 @@ public class SkillsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_skills, container, false);
+        View view = inflater.inflate(R.layout.fragment_skills, container, false);
+        final RecyclerView skillsRecyclerView = view.findViewById(R.id.skills_recycler_view);
+        final LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
+        skillsRecyclerView.setLayoutManager(layoutManager);
+
+        SkillsIQService skillsService = ServiceBuilder.buildService(SkillsIQService.class);
+        Call<List<SkillsIQLeader>> request = skillsService.getIQScores();
+
+        request.enqueue(new Callback<List<SkillsIQLeader>>() {
+            @Override
+            public void onResponse(Call<List<SkillsIQLeader>> request, Response<List<SkillsIQLeader>> response) {
+                skillsRecyclerView.setAdapter(new SkillsRecyclerAdapter(getContext(),response.body()));
+            }
+
+            @Override
+            public void onFailure(Call<List<SkillsIQLeader>> request, Throwable t) {
+
+            }
+        });
+        return view;
     }
 }

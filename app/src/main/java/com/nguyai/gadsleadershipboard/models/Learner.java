@@ -1,30 +1,42 @@
-package com.nguyai.gadsleadershipboard;
+package com.nguyai.gadsleadershipboard.models;
+
+import java.net.URI;
 
 public class Learner {
-    private String learnerName;
-    private int learningHours;
+    private String name;
+    private int hours;
     private String country;
+    private URI badgeUrl;
 
-    public Learner(String learnerName, int learningHours, String country) {
-        this.learnerName = learnerName;
-        this.learningHours = learningHours;
+    public Learner(String name, int hours, String country, URI badgeUrl) {
+        this.name = name;
+        this.hours = hours;
         this.country = country;
+        this.badgeUrl = badgeUrl;
     }
 
-    public String getLearnerName() {
-        return learnerName;
+    public URI getBadgeUrl() {
+        return badgeUrl;
     }
 
-    public void setLearnerName(String learnerName) {
-        this.learnerName = learnerName;
+    public void setBadgeUrl(URI badgeUrl) {
+        this.badgeUrl = badgeUrl;
     }
 
-    public int getLearningHours() {
-        return learningHours;
+    public String getName() {
+        return name;
     }
 
-    public void setLearningHours(int learningHours) {
-        this.learningHours = learningHours;
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getHours() {
+        return hours;
+    }
+
+    public void setHours(int hours) {
+        this.hours = hours;
     }
 
     public String getCountry() {
